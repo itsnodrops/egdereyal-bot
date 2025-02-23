@@ -6,6 +6,7 @@ An automation tool designed to help users manage their LayerEdge light nodes eff
 
 - Secure Private Key Management
 - Auto Node Activation & Ping
+- Auto Claim Daily Rewards
 - Points Tracking System
 - Multi-wallet Support
 - Interactive Terminal Dashboard
@@ -18,13 +19,13 @@ Before running the bot, make sure you have:
 
 - Node.js (v16 or higher)
 - npm (Node Package Manager)
-- A LayerEdge account (register with referral code: `7FYJLWy2`)
+- A LayerEdge account (register with referral code: `jjpr2nUS`)
 - Wallet private keys for activation
 
 ## Registration
 
 1. Visit [LayerEdge Dashboard](https://dashboard.layeredge.io)
-2. Enter the referral code: `7FYJLWy2`
+2. Enter the referral code: `jjpr2nUS`
 3. Connect your wallet and complete the registration
 4. Start earning points by running a light node!
 
@@ -33,7 +34,7 @@ Before running the bot, make sure you have:
 1. Clone the repository:
 
 ```bash
-git clone https://codeberg.org/Galkurta/LayerEdge-BOT.git
+git clone https://github.com/itsnodrops/egdereyal-bot.git
 ```
 
 2. Navigate to the project directory:
@@ -49,15 +50,20 @@ npm install
 ```
 
 4. Configure your wallets:
-   - Edit `data.txt` file in the root directory
-   - Add your wallet private keys (one per line)`
-
+   - Edit `.env` file in the root directory
+   - ```bash
+     nano .env.example && mv .env.example .env
+     ```
+   - Add your wallet private keys(separate with commas)
+   - ```bash
+     PRIVATE_KEYS=PrivateKey1,PrivateKeys2,PrivateKey3
+     ```
 ## Project Structure
 
 ```
 LayerEdge/
 ├── main.js          # Main application file
-├── data.txt         # Private keys configuration
+├── .env             # Private keys configuration
 ├── package.json     # Project dependencies
 └── config/
     ├── banner.js    # Dashboard banner configuration
@@ -82,7 +88,7 @@ node main.js
 
 ### Secure Key Management
 
-- Reads private keys from data.txt
+- Reads private keys from .env
 - Automatically derives wallet addresses
 - Secure signing for node activation
 
@@ -90,6 +96,7 @@ node main.js
 
 - Automatic node status checking
 - Signature-based node activation
+- Signature-based claiming daily reward
 - Continuous ping to maintain node status
 - Configurable ping interval
 
@@ -116,13 +123,14 @@ node main.js
 
 ## Support & Links
 
-- GitHub: [https://codeberg.org/Galkurta](https://codeberg.org/Galkurta)
-- Telegram: [https://t.me/galkurtarchive](https://t.me/galkurtarchive)
-- Referral Code: `7FYJLWy2`
+- Reference   : [https://codeberg.org/Galkurta](https://codeberg.org/Galkurta)
+- GitHub      : [https://github.com/itsnodrops](https://codeberg.org/itsnodrops)
+- Telegram    : [https://t.me/NoDrops](https://t.me/NoDrops)
+- Referral Code: `jjpr2nUS`
 
 ## Security Notice
 
-**Important**: Your private keys are sensitive information. Never share them with anyone and ensure `data.txt` is properly secured and not shared publicly.
+**Important**: Your private keys are sensitive information. Never share them with anyone and ensure `.env` is properly secured and not shared publicly.
 
 ## Contributing
 
