@@ -248,21 +248,6 @@ class WalletDashboard {
 
       const { nodePoints, dailyStreak, lastClaimed } =
         await this.updateWalletStatus(wallet);
-      stats.lastPing = new Date().toLocaleTimeString();
-      stats.points = nodePoints || stats.points;
-      stats.dailyStreak = dailyStreak;
-      stats.lastClaimed = lastClaimed
-        ? new Intl.DateTimeFormat("en-US", {
-            month: "short",
-            day: "numeric",
-            hour: "numeric",
-            minute: "numeric",
-            second: "numeric",
-            hour12: true,
-          }).format(new Date(lastClaimed))
-        : "Never Claimed";
-      stats.status = "Active";
-      stats.error = null;
 
       if (!lastClaimed || Date.now() - lastClaimed >= 24 * 60 * 60 * 1000) {
         try {
@@ -294,6 +279,23 @@ class WalletDashboard {
           stats.error = error.message;
         }
       }
+      
+      stats.lastPing = new Date().toLocaleTimeString();
+      stats.points = nodePoints || stats.points;
+      stats.dailyStreak = dailyStreak;
+      stats.lastClaimed = lastClaimed
+        ? new Intl.DateTimeFormat("en-US", {
+            month: "short",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            second: "numeric",
+            hour12: true,
+          }).format(new Date(lastClaimed))
+        : "Never Claimed";
+      stats.status = "Active";
+      stats.error = null;
+      
     } catch (error) {
       stats.status = "Error";
       stats.error = error.message;
