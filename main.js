@@ -288,6 +288,7 @@ class WalletDashboard {
       const lastClaimedUTC = new Date(lastClaimed).getTime();
       if (!lastClaimed || Date.now() - lastClaimedUTC >= 24 * 60 * 60 * 1000) {
         try {
+          const privateKey = this.privateKeys.get(wallet);
           const claimed = await this.claimDailyPoints(wallet, privateKey);
           if (claimed) {
             stats.status = "Daily Rewards Claimed Succesfully!";
@@ -362,6 +363,7 @@ class WalletDashboard {
       const lastClaimedUTC = new Date(lastClaimed).getTime();
       if (!lastClaimed || Date.now() - lastClaimedUTC >= 24 * 60 * 60 * 1000) {
           try {
+            const privateKey = this.privateKeys.get(wallet);
             const claimed = await this.claimDailyPoints(wallet, privateKey);
             if (claimed) {
               stats.status = "Claimed Daily Points";
