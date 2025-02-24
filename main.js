@@ -284,8 +284,9 @@ class WalletDashboard {
 
       const { nodePoints, dailyStreak, lastClaimed } =
         await this.updateWalletStatus(wallet);
-
-      if (!lastClaimed || Date.now() - lastClaimed >= 24 * 60 * 60 * 1000) {
+      
+      const lastClaimedUTC = new Date(lastClaimed).getTime();
+      if (!lastClaimed || Date.now() - lastClaimedUTC >= 24 * 60 * 60 * 1000) {
         try {
           const claimed = await this.claimDailyPoints(wallet, privateKey);
           if (claimed) {
@@ -304,7 +305,7 @@ class WalletDashboard {
                   minute: "numeric",
                   second: "numeric",
                   hour12: true,
-                }).format(new Date(lastClaimed))
+                }).format(new Date(lastClaimed)).toLocaleString()
               : "Never Claimed";
           }
         } catch (error) {
@@ -327,7 +328,7 @@ class WalletDashboard {
             minute: "numeric",
             second: "numeric",
             hour12: true,
-          }).format(new Date(lastClaimed))
+          }).format(new Date(lastClaimed)).toLocaleString()
         : "Never Claimed";
       stats.status = "Active";
       stats.error = null;
@@ -353,12 +354,13 @@ class WalletDashboard {
               minute: "numeric",
               second: "numeric",
               hour12: true,
-            }).format(new Date(lastClaimed))
+            }).format(new Date(lastClaimed)).toLocaleString()
           : "Never Claimed";
         stats.status = "Active";
         stats.error = null;
-
-        if (!lastClaimed || Date.now() - lastClaimed >= 24 * 60 * 60 * 1000) {
+        
+      const lastClaimedUTC = new Date(lastClaimed).getTime();
+      if (!lastClaimed || Date.now() - lastClaimedUTC >= 24 * 60 * 60 * 1000) {
           try {
             const claimed = await this.claimDailyPoints(wallet, privateKey);
             if (claimed) {
@@ -377,7 +379,7 @@ class WalletDashboard {
                     minute: "numeric",
                     second: "numeric",
                     hour12: true,
-                  }).format(new Date(lastClaimed))
+                  }).format(new Date(lastClaimed)).toLocaleString()
                 : "Never Claimed";
             }
           } catch (error) {
