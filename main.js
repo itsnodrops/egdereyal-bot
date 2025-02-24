@@ -305,7 +305,7 @@ class WalletDashboard {
                   minute: "numeric",
                   second: "numeric",
                   hour12: true,
-                }).format(new Date(lastClaimed))
+                }).format(new Date(lastClaimed)).toLocaleString()
               : "Never Claimed";
           }
         } catch (error) {
@@ -328,7 +328,7 @@ class WalletDashboard {
             minute: "numeric",
             second: "numeric",
             hour12: true,
-          }).format(new Date(lastClaimed))
+          }).format(new Date(lastClaimed)).toLocaleString()
         : "Never Claimed";
       stats.status = "Active";
       stats.error = null;
@@ -354,7 +354,7 @@ class WalletDashboard {
               minute: "numeric",
               second: "numeric",
               hour12: true,
-            }).format(new Date(lastClaimed))
+            }).format(new Date(lastClaimed)).toLocaleString()
           : "Never Claimed";
         stats.status = "Active";
         stats.error = null;
@@ -379,7 +379,7 @@ class WalletDashboard {
                     minute: "numeric",
                     second: "numeric",
                     hour12: true,
-                  }).format(new Date(lastClaimed))
+                  }).format(new Date(lastClaimed)).toLocaleString()
                 : "Never Claimed";
             }
           } catch (error) {
