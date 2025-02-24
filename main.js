@@ -284,8 +284,9 @@ class WalletDashboard {
 
       const { nodePoints, dailyStreak, lastClaimed } =
         await this.updateWalletStatus(wallet);
-
-      if (!lastClaimed || Date.now() - lastClaimed >= 24 * 60 * 60 * 1000) {
+      
+      const lastClaimedUTC = new Date(lastClaimed).getTime();
+      if (!lastClaimed || Date.now() - lastClaimedUTC >= 24 * 60 * 60 * 1000) {
         try {
           const claimed = await this.claimDailyPoints(wallet, privateKey);
           if (claimed) {
@@ -357,8 +358,9 @@ class WalletDashboard {
           : "Never Claimed";
         stats.status = "Active";
         stats.error = null;
-
-        if (!lastClaimed || Date.now() - lastClaimed >= 24 * 60 * 60 * 1000) {
+        
+      const lastClaimedUTC = new Date(lastClaimed).getTime();
+      if (!lastClaimed || Date.now() - lastClaimedUTC >= 24 * 60 * 60 * 1000) {
           try {
             const claimed = await this.claimDailyPoints(wallet, privateKey);
             if (claimed) {
