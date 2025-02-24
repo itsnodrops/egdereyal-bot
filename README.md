@@ -40,7 +40,7 @@ git clone https://github.com/itsnodrops/egdereyal-bot.git
 2. Navigate to the project directory:
 
 ```bash
-cd edgereyal-bot
+cd egdereyal-bot
 ```
 
 3. Install dependencies:
@@ -58,19 +58,7 @@ npm install
    - ```bash
      PRIVATE_KEYS=PrivateKey1,PrivateKeys2,PrivateKey3
      ```
-## Project Structure
-
-```
-LayerEdge/
-├── main.js          # Main application file
-├── .env             # Private keys configuration
-├── package.json     # Project dependencies
-└── config/
-    ├── banner.js    # Dashboard banner configuration
-    ├── colors.js    # Color scheme configuration
-    └── ...
-```
-
+     
 ## Usage
 
 1. Start the bot:
@@ -83,6 +71,19 @@ node main.js
    - ↑/↓: Navigate between wallets
    - ←/→: Change pages
    - Ctrl+C: Exit program
+
+## Project Structure
+
+```
+egdereyal-bot/
+├── main.js          # Main application file
+├── .env             # Private keys configuration
+├── package.json     # Project dependencies
+└── config/
+    ├── banner.js    # Dashboard banner configuration
+    ├── colors.js    # Color scheme configuration
+    └── ...
+```
 
 ## Features Explained
 

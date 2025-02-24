@@ -289,7 +289,7 @@ class WalletDashboard {
         try {
           const claimed = await this.claimDailyPoints(wallet, privateKey);
           if (claimed) {
-            stats.status = "Claimed Daily Points";
+            stats.status = "Daily Rewards Claimed Succesfully!";
             this.renderDashboard();
 
             const { nodePoints, dailyStreak, lastClaimed } =
