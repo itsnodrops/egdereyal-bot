@@ -40,7 +40,7 @@ git clone https://github.com/itsnodrops/egdereyal-bot.git
 2. Navigate to the project directory:
 
 ```bash
-cd LayerEdge-BOT
+cd edgereyal-bot
 ```
 
 3. Install dependencies:
@@ -52,7 +52,7 @@ npm install
 4. Configure your wallets:
    - Edit `.env` file in the root directory
    - ```bash
-     nano .env.example && mv .env.example .env
+     mv .env.example .env && nano .env
      ```
    - Add your wallet private keys(separate with commas)
    - ```bash
