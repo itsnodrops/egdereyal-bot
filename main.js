@@ -94,127 +94,151 @@ class WalletDashboard {
     });
   }
 
-  async signAndStart(wallet, privateKey) {
-    try {
-      const walletInstance = new Wallet(privateKey);
-      const timestamp = Date.now();
-      const message = `Node activation request for ${wallet} at ${timestamp}`;
-      const sign = await walletInstance.signMessage(message);
-
-      const response = await this.getApi().post(
-        `/light-node/node-action/${wallet}/start`,
-        {
-          sign: sign,
-          timestamp: timestamp,
-        }
-      );
-
-      return response.data?.message === "node action executed successfully";
-    } catch (error) {
-      throw new Error(`Node activation failed: ${error.message}`);
-    }
-  }
-
-  async claimDailyPoints(wallet, privateKey) {
-    try {
-      const walletInstance = new Wallet(privateKey);
-      const timestamp = Date.now();
-      const message = `I am claiming my daily node point for ${wallet} at ${timestamp}`;
-      const sign = await walletInstance.signMessage(message);
-
-      const response = await this.getApi().post(
-        `/light-node/claim-node-points`,
-        {
-          walletAddress: wallet,
-          timestamp: timestamp,
-          sign: sign,
-        }
-      );
-
-      return response.data?.message === "node points claimed successfully";
-    } catch (error) {
-      if (error.response) {
-        switch (error.response.status) {
-          case 405:
-            throw new Error("Points already claimed today, try again later");
-          default:
-            throw new Error(`Claim points failed: ${error.message}`);
-        }
-      }
-    }
-  }
-
-  async checkNodeStatus(wallet, retries = 20) {
-    for (let i = 0; i < retries; i++) {
+  async checkNodeStatus(wallet, retries = 100, delay = 5000) {
+    for (let attempt = 0; attempt < retries; attempt++) {
       try {
         const response = await this.getApi().get(
           `/light-node/node-status/${wallet}`
         );
         return response.data?.data?.startTimestamp !== null;
       } catch (error) {
-        if (i === retries - 1) {
-          if (error.code === "ETIMEDOUT" || error.code === "ECONNABORTED") {
-            throw new Error(
-              "Connection timeout, please check your internet connection"
-            );
-          }
-          if (error.response?.status === 404) {
-            throw new Error("Node not found");
-          }
+        if (
+          attempt < retries - 1 &&
+          (error.response?.status === 502 || error.code === "ETIMEDOUT")
+        ) {
+          console.warn(
+            `[Retry ${attempt + 1}] Node status check failed, retrying in ${
+              delay / 1000
+            }s...`
+          );
+          await new Promise((resolve) => setTimeout(resolve, delay));
+        } else {
           throw new Error(`Check status failed: ${error.message}`);
         }
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        continue;
       }
     }
   }
 
-  async checkWalletDetails(wallet) {
-    try {
-      const response = await this.getApi().get(
-        `/referral/wallet-details/${wallet}`
-      );
-      const data = response.data?.data;
-
-      return {
-        nodePoints: data?.nodePoints || 0,
-        dailyStreak: data?.dailyStreak || 0,
-        lastClaimed: data?.lastClaimed
-          ? new Date(data.lastClaimed).getTime()
-          : null,
-      };
-    } catch (error) {
-      throw new Error(`Fetching wallet details failed: ${error.message}`);
+  async checkWalletDetails(wallet, retries = 100, delay = 5000) {
+    for (let attempt = 0; attempt < retries; attempt++) {
+      try {
+        const response = await this.getApi().get(
+          `/referral/wallet-details/${wallet}`
+        );
+        return response.data?.data || {};
+      } catch (error) {
+        if (attempt < retries - 1 && error.response?.status === 502) {
+          console.warn(
+            `Fetching wallet details failed (502), retrying in ${
+              delay / 1000
+            }s...`
+          );
+          await new Promise((resolve) => setTimeout(resolve, delay));
+          continue;
+        }
+        throw new Error(`Fetching wallet details failed: ${error.message}`);
+      }
     }
   }
 
-  async updateWalletStatus(wallet) {
-    try {
-      const timestamp = Date.now();
+  async updateWalletStatus(wallet, retries = 100, delay = 5000) {
+    for (let attempt = 0; attempt < retries; attempt++) {
+      try {
+        const isRunning = await this.checkNodeStatus(wallet);
+        if (!isRunning) throw new Error("Node not running");
 
-      const isRunning = await this.checkNodeStatus(wallet);
-      if (!isRunning) {
-        throw new Error("Node not running");
-      }
-
-      const { nodePoints, dailyStreak, lastClaimed } =
-        await this.checkWalletDetails(wallet);
-
-      return { nodePoints, dailyStreak, lastClaimed };
-    } catch (error) {
-      if (error.response) {
-        switch (error.response.status) {
-          case 500:
-            throw new Error("Internal Server Error");
-          case 504:
-            throw new Error("Gateway Timeout");
-          case 403:
-            throw new Error("Node not activated");
-          default:
-            throw new Error(`Update wallet data failed: ${error.message}`);
+        const walletDetails = await this.checkWalletDetails(wallet);
+        return walletDetails;
+      } catch (error) {
+        if (
+          attempt < retries - 1 &&
+          (error.response?.status === 502 || error.code === "ETIMEDOUT")
+        ) {
+          console.warn(
+            `[Retry ${
+              attempt + 1
+            }] Updating wallet status failed, retrying in ${delay / 1000}s...`
+          );
+          await new Promise((resolve) => setTimeout(resolve, delay));
+        } else {
+          throw new Error(`Update wallet status failed: ${error.message}`);
         }
       }
-      throw error;
+    }
+  }
+
+  async claimDailyPoints(wallet, privateKey, retries = 100, delay = 5000) {
+    for (let attempt = 0; attempt < retries; attempt++) {
+      try {
+        const walletInstance = new Wallet(privateKey);
+        const timestamp = Date.now();
+        const message = `I am claiming my daily node point for ${wallet} at ${timestamp}`;
+        const sign = await walletInstance.signMessage(message);
+
+        const response = await this.getApi().post(
+          `/light-node/claim-node-points`,
+          {
+            walletAddress: wallet,
+            timestamp: timestamp,
+            sign: sign,
+          }
+        );
+
+        return response.data?.message === "node points claimed successfully";
+      } catch (error) {
+        if (error.response?.status === 405) {
+          throw new Error("Points already claimed today");
+        }
+
+        if (
+          attempt < retries - 1 &&
+          (error.response?.status === 502 || error.code === "ETIMEDOUT")
+        ) {
+          console.warn(
+            `[Retry ${attempt + 1}] Claiming daily points failed, retrying in ${
+              delay / 1000
+            }s...`
+          );
+          await new Promise((resolve) => setTimeout(resolve, delay));
+        } else {
+          throw new Error(`Claim points failed: ${error.message}`);
+        }
+      }
+    }
+  }
+
+  async signAndStart(wallet, privateKey, retries = 100, delay = 5000) {
+    for (let attempt = 0; attempt < retries; attempt++) {
+      try {
+        const walletInstance = new Wallet(privateKey);
+        const timestamp = Date.now();
+        const message = `Node activation request for ${wallet} at ${timestamp}`;
+        const sign = await walletInstance.signMessage(message);
+
+        const response = await this.getApi().post(
+          `/light-node/node-action/${wallet}/start`,
+          {
+            sign: sign,
+            timestamp: timestamp,
+          }
+        );
+
+        return response.data?.message === "node action executed successfully";
+      } catch (error) {
+        if (
+          attempt < retries - 1 &&
+          (error.response?.status === 502 || error.code === "ETIMEDOUT")
+        ) {
+          console.warn(
+            `[Retry ${attempt + 1}] Node activation failed, retrying in ${
+              delay / 1000
+            }s...`
+          );
+          await new Promise((resolve) => setTimeout(resolve, delay));
+        } else {
+          throw new Error(`Node activation failed: ${error.message}`);
+        }
+      }
     }
   }
 
@@ -227,6 +251,7 @@ class WalletDashboard {
 
     try {
       const privateKey = this.privateKeys.get(wallet);
+
       if (!privateKey) {
         throw new Error("Private key not found for wallet");
       }
@@ -234,7 +259,7 @@ class WalletDashboard {
       stats.status = "Checking Status";
       this.renderDashboard();
 
-      const isRunning = await this.checkNodeStatus(wallet);
+      let isRunning = await this.checkNodeStatus(wallet);
       if (!isRunning) {
         stats.status = "Activating";
         this.renderDashboard();
@@ -243,26 +268,22 @@ class WalletDashboard {
         stats.status = "Activated";
         this.renderDashboard();
 
-        await new Promise((resolve) => setTimeout(resolve, 5000));
+        for (let attempt = 0; attempt < 100; attempt++) {
+          await new Promise((resolve) => setTimeout(resolve, 5000)); // ⏳ Tunggu sebelum retry
+          isRunning = await this.checkNodeStatus(wallet);
+          if (isRunning) break;
+          console.warn(`[Retry ${attempt + 1}] Checking node status...`);
+        }
+
+        if (!isRunning) {
+          throw new Error("Node activation failed after multiple attempts");
+        }
       }
+
+      await new Promise((resolve) => setTimeout(resolve, 5000));
 
       const { nodePoints, dailyStreak, lastClaimed } =
         await this.updateWalletStatus(wallet);
-      stats.lastPing = new Date().toLocaleTimeString();
-      stats.points = nodePoints || stats.points;
-      stats.dailyStreak = dailyStreak;
-      stats.lastClaimed = lastClaimed
-        ? new Intl.DateTimeFormat("en-US", {
-            month: "short",
-            day: "numeric",
-            hour: "numeric",
-            minute: "numeric",
-            second: "numeric",
-            hour12: true,
-          }).format(new Date(lastClaimed))
-        : "Never Claimed";
-      stats.status = "Active";
-      stats.error = null;
 
       if (!lastClaimed || Date.now() - lastClaimed >= 24 * 60 * 60 * 1000) {
         try {
@@ -294,6 +315,22 @@ class WalletDashboard {
           stats.error = error.message;
         }
       }
+
+      stats.lastPing = new Date().toLocaleTimeString();
+      stats.points = nodePoints || stats.points;
+      stats.dailyStreak = dailyStreak;
+      stats.lastClaimed = lastClaimed
+        ? new Intl.DateTimeFormat("en-US", {
+            month: "short",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            second: "numeric",
+            hour12: true,
+          }).format(new Date(lastClaimed))
+        : "Never Claimed";
+      stats.status = "Active";
+      stats.error = null;
     } catch (error) {
       stats.status = "Error";
       stats.error = error.message;
@@ -325,7 +362,7 @@ class WalletDashboard {
           try {
             const claimed = await this.claimDailyPoints(wallet, privateKey);
             if (claimed) {
-              stats.status = "Daily Rewards Claimed Succesfully!";
+              stats.status = "Claimed Daily Points";
               this.renderDashboard();
 
               const { nodePoints, dailyStreak, lastClaimed } =
