@@ -61,7 +61,7 @@ npm install
      
 ## Usage
 
-1. Start the bot:
+1. Start the bot inside the directory (use `cd egdereyal-bot` to access it):
 
 ```bash
 node main.js
