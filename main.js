@@ -1,1 +1,626 @@
-const _0xaccaef=_0xe755;(function(_0x49d816,_0x2e961a){const _0x55f0f7=_0xe755,_0x582f19=_0x49d816();while(!![]){try{const _0x2b29c3=-parseInt(_0x55f0f7(0x10b))/0x1+parseInt(_0x55f0f7(0x107))/0x2+-parseInt(_0x55f0f7(0x12f))/0x3+-parseInt(_0x55f0f7(0x138))/0x4*(-parseInt(_0x55f0f7(0xe2))/0x5)+-parseInt(_0x55f0f7(0xf5))/0x6+parseInt(_0x55f0f7(0x134))/0x7*(parseInt(_0x55f0f7(0x140))/0x8)+parseInt(_0x55f0f7(0x11c))/0x9;if(_0x2b29c3===_0x2e961a)break;else _0x582f19['push'](_0x582f19['shift']());}catch(_0x35145e){_0x582f19['push'](_0x582f19['shift']());}}}(_0x1696,0x7ef5d));import _0x226cda from'fs/promises';function _0x1696(){const _0x219167=['format','getApi','Error\x20claiming\x20daily\x20points\x20for\x20','renderDashboard','en-US,en;q=0.9','Retrying\x20in\x20','dailyStreak','\x20\x20\x20Status:\x20','stdin','claimDailyPoints','checkWalletDetails','\x20\x20\x20Last\x20Ping:\x20',']\x20Node\x20is\x20not\x20running!\x20Restarting...','\x20\x20\x20Error:\x20','get','log','data','lastPing','pingIntervals','signMessage',']\x20Checking\x20node\x20status...','currentPage','utf8','Checking\x20Status','renderTimeout','pause','\x20-\x20','ETIMEDOUT','Active','wallets','\x20\x20\x20Points:\x20',']\x20Node\x20stopped!\x20Restarting...','Activated','right','updateWalletStatus','node\x20points\x20claimed\x20successfully','PING_INTERVAL_MS','minRenderInterval','https://referralapi.layeredge.io/','getStatusColor','split','Error\x20reading\x20data.txt:\x20','keypress','lastClaimed','10zWjaTZ','success','emit','down','Private\x20key\x20not\x20found\x20for\x20wallet','Mozilla/5.0\x20(Windows\x20NT\x2010.0;\x20Win64;\x20x64)\x20AppleWebKit/537.36\x20(KHTML,\x20like\x20Gecko)\x20Chrome/131.0.0.0\x20Safari/537.36','\x20Wallet:\x20','name',']\x20Node\x20not\x20running,\x20retrying\x20in\x20','.\x20Retrying\x20in\x20',']\x20Node\x20status\x20check\x20failed:\x20','lastRender','Error','Node\x20not\x20running','exit','I\x20am\x20claiming\x20my\x20daily\x20node\x20point\x20for\x20','No\x20valid\x20private\x20keys\x20found\x20in\x20data.txt','trim','warn','88572dpKnxy','Activation\x20Failed','join','readFile','application/json','toLocaleString','https://dashboard.layeredge.io','/referral/wallet-details/','Fatal\x20error:\x20','/light-node/node-status/','SIGINT','cyan','accountName','walletsPerPage','reset','Shutting\x20down...','/light-node/claim-node-points',']\x20Node\x20activation\x20failed:\x20','1780710JpKJCR','Activating','Starting','now','738057YcMXfG','code','message','selectedIndex','Restarting',']\x20Fetching\x20wallet\x20details\x20failed:\x20','start','actualRender','address','s...','length','set','checkNodeStatus','Node\x20activation\x20request\x20for\x20','getTime','min','ceil','2524311GMDzli',']\x20Points\x20already\x20claimed\x20today.','data.txt','emitKeypressEvents','signAndStart','startPing','short','privateKeys','\x20at\x20','taskComplete','push','en-US','retry','Error\x20starting\x20node\x20for\x20','walletStats','error','toLocaleTimeString','points','create','2145237bdnNGF','has','taskFailed','DateTimeFormat','\x1b[2J\x1b[H','35pOGGvt','Never\x20Claimed','substr','startTimestamp','60676nBcBSz','status','node\x20action\x20executed\x20successfully','...','handleKeyPress','Claimed\x20Daily\x20Points','taskInProgress','info','1258808Dkpxwb','numeric','/start'];_0x1696=function(){return _0x219167;};return _0x1696();}import _0x3413e0 from'axios';import _0x59ea63 from'readline';import{getBanner}from'./config/banner.js';import{colors}from'./config/colors.js';import{Wallet}from'ethers';const CONFIG={'PING_INTERVAL':0xa,get 'PING_INTERVAL_MS'(){return this['PING_INTERVAL']*0x3c*0x3e8;}};_0x59ea63[_0xaccaef(0x11f)](process[_0xaccaef(0x14b)]);class WalletDashboard{constructor(){const _0x246b38=_0xaccaef;this[_0x246b38(0xd3)]=[],this[_0x246b38(0x10e)]=0x0,this[_0x246b38(0xcb)]=0x0,this['walletsPerPage']=0xa,this['isRunning']=!![],this[_0x246b38(0xc8)]=new Map(),this[_0x246b38(0x12a)]=new Map(),this[_0x246b38(0x123)]=new Map(),this[_0x246b38(0xce)]=null,this[_0x246b38(0xed)]=0x0,this[_0x246b38(0xdb)]=0x64;}async['initialize'](){const _0x519238=_0xaccaef;try{const _0x2d0ecd=await _0x226cda[_0x519238(0xf8)](_0x519238(0x11e),_0x519238(0xcc)),_0xec3a3e=_0x2d0ecd[_0x519238(0xde)]('\x0a')['filter'](_0x491fd6=>_0x491fd6[_0x519238(0xf3)]()!=='');this[_0x519238(0xd3)]=[],this[_0x519238(0x123)]=new Map();for(let _0x285750 of _0xec3a3e){try{const _0x3e9094=new Wallet(_0x285750),_0xae8b05=_0x3e9094[_0x519238(0x113)];this[_0x519238(0xd3)][_0x519238(0x126)](_0xae8b05),this[_0x519238(0x123)]['set'](_0xae8b05,_0x285750),this[_0x519238(0x12a)]['set'](_0xae8b05,{'status':_0x519238(0x109),'lastPing':'-','points':0x0,'error':null}),this[_0x519238(0x121)](_0xae8b05);}catch(_0x6d152f){console[_0x519238(0x12b)](colors[_0x519238(0x12b)]+'Invalid\x20private\x20key:\x20'+_0x285750+_0x519238(0xd0)+_0x6d152f[_0x519238(0x10d)]+colors[_0x519238(0x103)]);}}if(this[_0x519238(0xd3)][_0x519238(0x115)]===0x0)throw new Error(_0x519238(0xf2));}catch(_0x27cc00){console[_0x519238(0x12b)](colors['error']+_0x519238(0xdf)+_0x27cc00+colors[_0x519238(0x103)]),process[_0x519238(0xf0)](0x1);}}[_0xaccaef(0x144)](){const _0x4efafe=_0xaccaef;return _0x3413e0[_0x4efafe(0x12e)]({'baseURL':'https://referralapi.layeredge.io/api','headers':{'Accept':'*/*','Accept-Encoding':'gzip,\x20deflate,\x20br','Accept-Language':_0x4efafe(0x147),'Content-Type':_0x4efafe(0xf9),'Origin':_0x4efafe(0xfb),'Referer':_0x4efafe(0xdc),'User-Agent':_0x4efafe(0xe7)},'timeout':0x7530,'maxRetries':0x14,'retryDelay':0x7d0,'retryCondition':_0x142ef5=>{const _0x14a3ea=_0x4efafe;return _0x3413e0['isNetworkError'](_0x142ef5)||_0x142ef5[_0x14a3ea(0x10c)]===_0x14a3ea(0xd1);}});}async[_0xaccaef(0x117)](_0x256aff,_0x1a7a72=0x2710){const _0x574cd0=_0xaccaef;while(!![]){try{const _0x455ce4=await this[_0x574cd0(0x144)]()[_0x574cd0(0xc4)](_0x574cd0(0xfe)+_0x256aff);return _0x455ce4['data']?.[_0x574cd0(0xc6)]?.[_0x574cd0(0x137)]!==null;}catch(_0x4200c7){console[_0x574cd0(0xf4)]('['+_0x256aff+_0x574cd0(0xec)+_0x4200c7[_0x574cd0(0x10d)]+_0x574cd0(0xeb)+_0x1a7a72/0x3e8+_0x574cd0(0x114)),await new Promise(_0x1d2cdd=>setTimeout(_0x1d2cdd,_0x1a7a72));}}}async[_0xaccaef(0x14d)](_0x23f4ba,_0x2de8c6=0x2710){const _0x209c38=_0xaccaef;while(!![]){try{const _0x37172e=await this[_0x209c38(0x144)]()[_0x209c38(0xc4)](_0x209c38(0xfc)+_0x23f4ba);return _0x37172e[_0x209c38(0xc6)]?.[_0x209c38(0xc6)]||{};}catch(_0x17114f){console[_0x209c38(0xf4)]('['+_0x23f4ba+_0x209c38(0x110)+_0x17114f['message']+'.\x20Retrying\x20in\x20'+_0x2de8c6/0x3e8+_0x209c38(0x114)),await new Promise(_0x104c79=>setTimeout(_0x104c79,_0x2de8c6));}}}async[_0xaccaef(0xd8)](_0x168ba1,_0x3e2510=0x2710){const _0x477c37=_0xaccaef;while(!![]){try{const _0x1500cd=await this[_0x477c37(0x117)](_0x168ba1);if(!_0x1500cd){console['warn']('['+_0x168ba1+_0x477c37(0xea)+_0x3e2510/0x3e8+_0x477c37(0x114)),await new Promise(_0x165203=>setTimeout(_0x165203,_0x3e2510));continue;}const _0x5df0e3=await this[_0x477c37(0x14d)](_0x168ba1);return _0x5df0e3;}catch(_0x4924c9){console[_0x477c37(0xf4)]('Error\x20updating\x20wallet\x20status\x20for\x20'+_0x168ba1+':\x20'+_0x4924c9[_0x477c37(0x10d)]),console[_0x477c37(0xf4)](_0x477c37(0x148)+_0x3e2510/0x3e8+_0x477c37(0x114)),await new Promise(_0x58c005=>setTimeout(_0x58c005,_0x3e2510));}}}async['claimDailyPoints'](_0x13e3c9,_0x14f99f,_0x246983=0x2710){const _0x4f6eea=_0xaccaef;while(!![]){try{const _0x136fd2=new Wallet(_0x14f99f),_0x564379=Date[_0x4f6eea(0x10a)](),_0x4160de=_0x4f6eea(0xf1)+_0x13e3c9+_0x4f6eea(0x124)+_0x564379,_0x8ae828=await _0x136fd2[_0x4f6eea(0xc9)](_0x4160de),_0xcf36a2=await this[_0x4f6eea(0x144)]()['post'](_0x4f6eea(0x105),{'walletAddress':_0x13e3c9,'timestamp':_0x564379,'sign':_0x8ae828});if(_0xcf36a2[_0x4f6eea(0xc6)]?.[_0x4f6eea(0x10d)]===_0x4f6eea(0xd9))return!![];}catch(_0x31813f){if(_0x31813f['response']?.['status']===0x195)return console[_0x4f6eea(0xf4)]('['+_0x13e3c9+_0x4f6eea(0x11d)),![];console[_0x4f6eea(0xf4)]('['+_0x13e3c9+']\x20Claiming\x20daily\x20points\x20failed:\x20'+_0x31813f[_0x4f6eea(0x10d)]+_0x4f6eea(0xeb)+_0x246983/0x3e8+_0x4f6eea(0x114)),await new Promise(_0x1e9741=>setTimeout(_0x1e9741,_0x246983));}}}async[_0xaccaef(0x120)](_0x36cd22,_0x140db3,_0x37da51=0x2710){const _0x432a51=_0xaccaef;while(!![]){try{const _0x59f47c=new Wallet(_0x140db3),_0x431571=Date[_0x432a51(0x10a)](),_0x21c3db=_0x432a51(0x118)+_0x36cd22+_0x432a51(0x124)+_0x431571,_0x5dbfee=await _0x59f47c[_0x432a51(0xc9)](_0x21c3db),_0x3d8a20=await this[_0x432a51(0x144)]()['post']('/light-node/node-action/'+_0x36cd22+_0x432a51(0x142),{'sign':_0x5dbfee,'timestamp':_0x431571});if(_0x3d8a20[_0x432a51(0xc6)]?.[_0x432a51(0x10d)]===_0x432a51(0x13a))return!![];}catch(_0x1fa93d){console[_0x432a51(0xf4)]('['+_0x36cd22+_0x432a51(0x106)+_0x1fa93d[_0x432a51(0x10d)]+_0x432a51(0xeb)+_0x37da51/0x3e8+_0x432a51(0x114)),await new Promise(_0xc767e=>setTimeout(_0xc767e,_0x37da51));}}}async[_0xaccaef(0x121)](_0x42e972){const _0x876bfa=_0xaccaef;if(this[_0x876bfa(0xc8)][_0x876bfa(0x130)](_0x42e972))return;const _0x1f078c=this[_0x876bfa(0x12a)][_0x876bfa(0xc4)](_0x42e972);try{const _0x59ca7a=this[_0x876bfa(0x123)][_0x876bfa(0xc4)](_0x42e972);if(!_0x59ca7a)throw new Error(_0x876bfa(0xe6));_0x1f078c[_0x876bfa(0x139)]=_0x876bfa(0xcd),this['renderDashboard']();let _0x18438a=await this['checkNodeStatus'](_0x42e972);if(!_0x18438a){_0x1f078c['status']=_0x876bfa(0x108),this[_0x876bfa(0x146)](),await this[_0x876bfa(0x120)](_0x42e972,_0x59ca7a),_0x1f078c['status']=_0x876bfa(0xd6),this[_0x876bfa(0x146)]();for(let _0x4e5abe=0x0;_0x4e5abe<0x2710;_0x4e5abe++){await new Promise(_0x149744=>setTimeout(_0x149744,0x2710)),_0x18438a=await this[_0x876bfa(0x117)](_0x42e972);if(_0x18438a)break;console[_0x876bfa(0xf4)]('[Retry\x20'+(_0x4e5abe+0x1)+_0x876bfa(0xca));}if(!_0x18438a)throw new Error('Node\x20activation\x20failed\x20after\x20multiple\x20attempts');}await new Promise(_0x1cd956=>setTimeout(_0x1cd956,0x2710));let {nodePoints:_0x4293e7,dailyStreak:_0x35da5d,lastClaimed:_0x27a445,error:_0x4165c9}=await this[_0x876bfa(0xd8)](_0x42e972);_0x4165c9===_0x876bfa(0xef)&&(console[_0x876bfa(0xf4)]('['+_0x42e972+_0x876bfa(0x14f)),_0x1f078c[_0x876bfa(0x139)]=_0x876bfa(0x10f),this[_0x876bfa(0x146)](),await this[_0x876bfa(0x120)](_0x42e972,_0x59ca7a),_0x1f078c[_0x876bfa(0x139)]=_0x876bfa(0xd6),this[_0x876bfa(0x146)](),await new Promise(_0x2a5d3a=>setTimeout(_0x2a5d3a,0x2710)),{nodePoints:_0x4293e7,dailyStreak:_0x35da5d,lastClaimed:_0x27a445}=await this['updateWalletStatus'](_0x42e972));const _0x559c9c=new Date(_0x27a445)[_0x876bfa(0x119)]();if(!_0x27a445||Date[_0x876bfa(0x10a)]()-_0x559c9c>=0x18*0x3c*0x3c*0x3e8)try{const _0x4d95c5=this['privateKeys']['get'](_0x42e972),_0x3f7b85=await this[_0x876bfa(0x14c)](_0x42e972,_0x4d95c5);if(_0x3f7b85){_0x1f078c[_0x876bfa(0x139)]=_0x876bfa(0x13d),this[_0x876bfa(0x146)]();const {nodePoints:_0x24d76d,dailyStreak:_0x5d4ee9,lastClaimed:_0x592d62}=await this['updateWalletStatus'](_0x42e972);_0x1f078c[_0x876bfa(0x12d)]=_0x24d76d,_0x1f078c[_0x876bfa(0x149)]=_0x5d4ee9,_0x1f078c['lastClaimed']=_0x592d62?new Intl[(_0x876bfa(0x132))](_0x876bfa(0x127),{'month':_0x876bfa(0x122),'day':'numeric','hour':_0x876bfa(0x141),'minute':_0x876bfa(0x141),'second':_0x876bfa(0x141),'hour12':!![]})['format'](new Date(_0x592d62))['toLocaleString']():_0x876bfa(0x135);}}catch(_0xaba5){console[_0x876bfa(0x12b)](_0x876bfa(0x145)+_0x42e972+':',_0xaba5[_0x876bfa(0x10d)]),_0x1f078c['error']=_0xaba5[_0x876bfa(0x10d)];}_0x1f078c[_0x876bfa(0xc7)]=new Date()[_0x876bfa(0x12c)](),_0x1f078c[_0x876bfa(0x12d)]=_0x4293e7||_0x1f078c[_0x876bfa(0x12d)],_0x1f078c[_0x876bfa(0x149)]=_0x35da5d,_0x1f078c[_0x876bfa(0xe1)]=_0x27a445?new Intl[(_0x876bfa(0x132))](_0x876bfa(0x127),{'month':_0x876bfa(0x122),'day':_0x876bfa(0x141),'hour':_0x876bfa(0x141),'minute':_0x876bfa(0x141),'second':'numeric','hour12':!![]})[_0x876bfa(0x143)](new Date(_0x27a445))[_0x876bfa(0xfa)]():_0x876bfa(0x135),_0x1f078c[_0x876bfa(0x139)]='Active',_0x1f078c['error']=null;}catch(_0x4c17ce){_0x1f078c[_0x876bfa(0x139)]=_0x876bfa(0xee),_0x1f078c[_0x876bfa(0x12b)]=_0x4c17ce[_0x876bfa(0x10d)],console[_0x876bfa(0x12b)](_0x876bfa(0x129)+_0x42e972+':',_0x4c17ce[_0x876bfa(0x10d)]);return;}const _0x28f2ce=setInterval(async()=>{const _0x4e1207=_0x876bfa;try{let {nodePoints:_0x4ec60c,dailyStreak:_0x3b5195,lastClaimed:_0x161cb4,error:_0x645022}=await this[_0x4e1207(0xd8)](_0x42e972);_0x645022==='Node\x20not\x20running'&&(console[_0x4e1207(0xf4)]('['+_0x42e972+_0x4e1207(0xd5)),_0x1f078c[_0x4e1207(0x139)]=_0x4e1207(0x10f),this[_0x4e1207(0x146)](),await this[_0x4e1207(0x128)](()=>this[_0x4e1207(0x120)](_0x42e972,privateKey),0x186a0,0x2710),_0x1f078c[_0x4e1207(0x139)]='Activated',this[_0x4e1207(0x146)](),await new Promise(_0x368b31=>setTimeout(_0x368b31,0x2710)),{nodePoints:_0x4ec60c,dailyStreak:_0x3b5195,lastClaimed:_0x161cb4}=await this['retry'](()=>this['updateWalletStatus'](_0x42e972),0x186a0,0x2710));_0x1f078c[_0x4e1207(0xc7)]=new Date()[_0x4e1207(0x12c)](),_0x1f078c[_0x4e1207(0x12d)]=_0x4ec60c||_0x1f078c['points'],_0x1f078c[_0x4e1207(0x149)]=_0x3b5195,_0x1f078c[_0x4e1207(0xe1)]=_0x161cb4?new Intl[(_0x4e1207(0x132))](_0x4e1207(0x127),{'month':_0x4e1207(0x122),'day':_0x4e1207(0x141),'hour':_0x4e1207(0x141),'minute':'numeric','second':_0x4e1207(0x141),'hour12':!![]})['format'](new Date(_0x161cb4))['toLocaleString']():_0x4e1207(0x135),_0x1f078c['status']=_0x4e1207(0xd2),_0x1f078c['error']=null;const _0x335b04=new Date(_0x161cb4)['getTime']();if(!_0x161cb4||Date[_0x4e1207(0x10a)]()-_0x335b04>=0x18*0x3c*0x3c*0x3e8)try{const _0x32156f=this[_0x4e1207(0x123)][_0x4e1207(0xc4)](_0x42e972),_0x44f886=await this[_0x4e1207(0x14c)](_0x42e972,_0x32156f);if(_0x44f886){_0x1f078c[_0x4e1207(0x139)]=_0x4e1207(0x13d),this[_0x4e1207(0x146)]();const {nodePoints:_0x2b6e36,dailyStreak:_0x72f4e2,lastClaimed:_0x4701e3}=await this[_0x4e1207(0xd8)](_0x42e972);_0x1f078c[_0x4e1207(0x12d)]=_0x2b6e36,_0x1f078c[_0x4e1207(0x149)]=_0x72f4e2,_0x1f078c[_0x4e1207(0xe1)]=_0x4701e3?new Intl[(_0x4e1207(0x132))](_0x4e1207(0x127),{'month':'short','day':_0x4e1207(0x141),'hour':_0x4e1207(0x141),'minute':'numeric','second':_0x4e1207(0x141),'hour12':!![]})[_0x4e1207(0x143)](new Date(_0x4701e3))[_0x4e1207(0xfa)]():_0x4e1207(0x135);}}catch(_0x19716){console[_0x4e1207(0x12b)](_0x4e1207(0x145)+_0x42e972+':',_0x19716[_0x4e1207(0x10d)]),_0x1f078c[_0x4e1207(0x12b)]=_0x19716['message'];}}catch(_0x572c35){_0x1f078c['status']=_0x4e1207(0xee),_0x1f078c[_0x4e1207(0x12b)]=_0x572c35[_0x4e1207(0x10d)];}this[_0x4e1207(0x146)]();},CONFIG[_0x876bfa(0xda)]);this[_0x876bfa(0xc8)][_0x876bfa(0x116)](_0x42e972,_0x28f2ce),this[_0x876bfa(0x146)]();}['renderDashboard'](){const _0x5cdb80=_0xaccaef,_0x54390f=Date[_0x5cdb80(0x10a)]();if(_0x54390f-this['lastRender']<this[_0x5cdb80(0xdb)]){this[_0x5cdb80(0xce)]&&clearTimeout(this[_0x5cdb80(0xce)]);this[_0x5cdb80(0xce)]=setTimeout(()=>{const _0x5a3e47=_0x5cdb80;this[_0x5a3e47(0x112)]();},this[_0x5cdb80(0xdb)]);return;}this[_0x5cdb80(0x112)]();}['actualRender'](){const _0x3dcd5a=_0xaccaef;this[_0x3dcd5a(0xed)]=Date[_0x3dcd5a(0x10a)]();let _0x348e9a=[];_0x348e9a[_0x3dcd5a(0x126)](_0x3dcd5a(0x133)),_0x348e9a[_0x3dcd5a(0x126)](getBanner());const _0xe3097a=this['currentPage']*this['walletsPerPage'],_0x27a90c=Math[_0x3dcd5a(0x11a)](_0xe3097a+this[_0x3dcd5a(0x102)],this[_0x3dcd5a(0xd3)][_0x3dcd5a(0x115)]),_0x36cba3=Math[_0x3dcd5a(0x11b)](this[_0x3dcd5a(0xd3)][_0x3dcd5a(0x115)]/this['walletsPerPage']);for(let _0x91578c=_0xe3097a;_0x91578c<_0x27a90c;_0x91578c++){const _0x10e4a7=this['wallets'][_0x91578c],_0x5915b4=this[_0x3dcd5a(0x12a)]['get'](_0x10e4a7),_0x10690e=_0x91578c===this['selectedIndex']?colors[_0x3dcd5a(0x100)]+'\x20'+colors[_0x3dcd5a(0x103)]+'\x20':'\x20\x20',_0x30b8e2=_0x10e4a7[_0x3dcd5a(0x136)](0x0,0x6)+_0x3dcd5a(0x13b)+_0x10e4a7['substr'](-0x4);_0x348e9a[_0x3dcd5a(0x126)](_0x10690e+_0x3dcd5a(0xe8)+colors[_0x3dcd5a(0x101)]+_0x30b8e2+colors['reset']),_0x348e9a[_0x3dcd5a(0x126)](_0x3dcd5a(0x14a)+this[_0x3dcd5a(0xdd)](_0x5915b4[_0x3dcd5a(0x139)])+_0x5915b4['status']+colors[_0x3dcd5a(0x103)]),_0x348e9a[_0x3dcd5a(0x126)](_0x3dcd5a(0xd4)+colors[_0x3dcd5a(0x13f)]+_0x5915b4[_0x3dcd5a(0x12d)]+colors[_0x3dcd5a(0x103)]),_0x348e9a['push']('\x20\x20\x20Streak:\x20'+colors['info']+_0x5915b4[_0x3dcd5a(0x149)]+colors[_0x3dcd5a(0x103)]),_0x348e9a[_0x3dcd5a(0x126)](_0x3dcd5a(0x14e)+colors[_0x3dcd5a(0x13f)]+_0x5915b4['lastPing']+colors[_0x3dcd5a(0x103)]),_0x348e9a[_0x3dcd5a(0x126)]('\x20\x20\x20Last\x20Claim:\x20'+colors['info']+(_0x5915b4[_0x3dcd5a(0xe1)]||'N/A')+colors[_0x3dcd5a(0x103)]),_0x5915b4[_0x3dcd5a(0x12b)]&&_0x348e9a[_0x3dcd5a(0x126)](_0x3dcd5a(0xc3)+colors[_0x3dcd5a(0x12b)]+_0x5915b4[_0x3dcd5a(0x12b)]+colors[_0x3dcd5a(0x103)]),_0x348e9a['push']('');}process['stdout']['write'](_0x348e9a[_0x3dcd5a(0xf7)]('\x0a'));}[_0xaccaef(0xdd)](_0x2ccc00){const _0x53581c=_0xaccaef;switch(_0x2ccc00){case _0x53581c(0xd2):return colors[_0x53581c(0xe3)];case _0x53581c(0xee):return colors[_0x53581c(0x12b)];case _0x53581c(0xd6):return colors[_0x53581c(0x125)];case _0x53581c(0xf6):return colors[_0x53581c(0x131)];case'Starting':return colors['taskInProgress'];case _0x53581c(0xcd):return colors[_0x53581c(0x13e)];case _0x53581c(0x108):return colors[_0x53581c(0x13e)];default:return colors[_0x53581c(0x103)];}}['handleKeyPress'](_0x1dda31,_0x4d0428){const _0x52817c=_0xaccaef,_0x51f23c=this['currentPage']*this[_0x52817c(0x102)],_0x45b5f6=Math[_0x52817c(0x11a)](_0x51f23c+this[_0x52817c(0x102)],this['wallets']['length']),_0xb8b52a=Math[_0x52817c(0x11b)](this[_0x52817c(0xd3)][_0x52817c(0x115)]/this[_0x52817c(0x102)]);if(_0x4d0428[_0x52817c(0xe9)]==='up'&&this[_0x52817c(0x10e)]>_0x51f23c)this['selectedIndex']--,this[_0x52817c(0x146)]();else{if(_0x4d0428[_0x52817c(0xe9)]===_0x52817c(0xe5)&&this[_0x52817c(0x10e)]<_0x45b5f6-0x1)this[_0x52817c(0x10e)]++,this[_0x52817c(0x146)]();else{if(_0x4d0428[_0x52817c(0xe9)]==='left'&&this['currentPage']>0x0)this[_0x52817c(0xcb)]--,this['selectedIndex']=this['currentPage']*this[_0x52817c(0x102)],this[_0x52817c(0x146)]();else _0x4d0428[_0x52817c(0xe9)]===_0x52817c(0xd7)&&this[_0x52817c(0xcb)]<_0xb8b52a-0x1&&(this[_0x52817c(0xcb)]++,this[_0x52817c(0x10e)]=this[_0x52817c(0xcb)]*this['walletsPerPage'],this[_0x52817c(0x146)]());}}}async[_0xaccaef(0x111)](){const _0xb253c6=_0xaccaef;process['on'](_0xb253c6(0xff),function(){const _0x5ebf13=_0xb253c6;console[_0x5ebf13(0xc5)]('\x0a'+colors[_0x5ebf13(0x13f)]+_0x5ebf13(0x104)+colors['reset']),process[_0x5ebf13(0xf0)]();}),process['on']('exit',()=>{const _0x5e38f2=_0xb253c6;for(let [_0x3aa4e7,_0x4f7cd5]of this[_0x5e38f2(0xc8)]){clearInterval(_0x4f7cd5);}process['stdin'][_0x5e38f2(0xcf)]();}),await this['initialize'](),this[_0xb253c6(0x146)](),process[_0xb253c6(0x14b)]['on'](_0xb253c6(0xe0),(_0x134d8d,_0x3e64da)=>{const _0x33abaa=_0xb253c6;_0x3e64da['ctrl']&&_0x3e64da[_0x33abaa(0xe9)]==='c'?process[_0x33abaa(0xe4)](_0x33abaa(0xff)):this[_0x33abaa(0x13c)](_0x134d8d,_0x3e64da);});}}function _0xe755(_0x2ecbfd,_0x64cbbc){const _0x1696f3=_0x1696();return _0xe755=function(_0xe7553d,_0x1425ed){_0xe7553d=_0xe7553d-0xc3;let _0x358abb=_0x1696f3[_0xe7553d];return _0x358abb;},_0xe755(_0x2ecbfd,_0x64cbbc);}const dashboard=new WalletDashboard();dashboard['start']()['catch'](_0x59fe94=>{const _0x520ff7=_0xaccaef;console[_0x520ff7(0x12b)](colors['error']+_0x520ff7(0xfd)+_0x59fe94+colors[_0x520ff7(0x103)]),process[_0x520ff7(0xf0)](0x1);});
+import fs from "fs/promises";
+import axios from "axios";
+import readline from "readline";
+import { getBanner } from "./config/banner.js";
+import { colors } from "./config/colors.js";
+import { Wallet } from "ethers";
+
+const CONFIG = {
+  PING_INTERVAL: 10,
+  get PING_INTERVAL_MS() {
+    return this.PING_INTERVAL * 60 * 1000;
+  },
+};
+
+readline.emitKeypressEvents(process.stdin);
+
+class WalletDashboard {
+  constructor() {
+    this.wallets = [];
+    this.selectedIndex = 0;
+    this.currentPage = 0;
+    this.walletsPerPage = 10;
+    this.isRunning = true;
+    this.pingIntervals = new Map();
+    this.walletStats = new Map();
+    this.privateKeys = new Map();
+    this.renderTimeout = null;
+    this.lastRender = 0;
+    this.minRenderInterval = 100;
+  }
+
+  async initialize() {
+    try {
+      const data = await fs.readFile("data.txt", "utf8");
+      const privateKeys = data.split("\n").filter((line) => line.trim() !== "");
+
+      this.wallets = [];
+      this.privateKeys = new Map();
+
+      for (let privateKey of privateKeys) {
+        try {
+          const wallet = new Wallet(privateKey);
+          const address = wallet.address;
+          this.wallets.push(address);
+          this.privateKeys.set(address, privateKey);
+
+          this.walletStats.set(address, {
+            status: "Starting",
+            lastPing: "-",
+            points: 0,
+            error: null,
+          });
+
+          this.startPing(address);
+        } catch (error) {
+          console.error(
+            `${colors.error}Invalid private key: ${privateKey} - ${error.message}${colors.reset}`
+          );
+        }
+      }
+
+      if (this.wallets.length === 0) {
+        throw new Error("No valid private keys found in data.txt");
+      }
+    } catch (error) {
+      console.error(
+        `${colors.error}Error reading data.txt: ${error}${colors.reset}`
+      );
+      process.exit(1);
+    }
+  }
+
+  getApi() {
+    return axios.create({
+      baseURL: "https://referralapi.layeredge.io/api",
+      headers: {
+        Accept: "*/*",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Content-Type": "application/json",
+        Origin: "https://dashboard.layeredge.io",
+        Referer: "https://referralapi.layeredge.io/",
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+      },
+      timeout: 30000,
+      maxRetries: 20,
+      retryDelay: 2000,
+      retryCondition: (error) => {
+        return axios.isNetworkError(error) || error.code === "ETIMEDOUT";
+      },
+    });
+    /**/
+  }
+
+/*
+  async checkNodeStatus(wallet, retries = 100000, delay = 5000) {
+    for (let attempt = 0; attempt < retries; attempt++) {
+      try {
+        const response = await this.getApi().get(`/light-node/node-status/${wallet}`);
+        return response.data?.data?.startTimestamp !== null;
+      } catch (error) {
+        if (attempt < retries - 1 && (error.response?.status === 502 || error.code === "ETIMEDOUT")) {
+          console.warn(`[Retry ${attempt + 1}] Node status check failed, retrying in ${delay / 1000}s...`);
+          await new Promise((resolve) => setTimeout(resolve, delay));
+        } else {
+          throw new Error(`Check status failed: ${error.message}`);
+        }
+      }
+    }
+  }
+
+  async checkWalletDetails(wallet, retries = 100000, delay = 5000) {
+    for (let attempt = 0; attempt < retries; attempt++) {
+      try {
+        const response = await this.getApi().get(`/referral/wallet-details/${wallet}`);
+        return response.data?.data || {};
+      } catch (error) {
+        if (attempt < retries - 1 && error.response?.status === 502) {
+          console.warn(`Fetching wallet details failed (502), retrying in ${delay / 1000}s...`);
+          await new Promise((resolve) => setTimeout(resolve, delay));
+          continue;
+        }
+        throw new Error(`Fetching wallet details failed: ${error.message}`);
+      }
+    }
+  }
+
+  async updateWalletStatus(wallet, retries = 100000, delay = 5000) {
+    for (let attempt = 0; attempt < retries; attempt++) {
+      try {
+        const isRunning = await this.checkNodeStatus(wallet);
+
+        if (!isRunning) {
+	  throw new Error("Node not running");
+	}
+
+        const walletDetails = await this.checkWalletDetails(wallet);
+        return walletDetails;
+      } catch (error) {
+        if (attempt < retries - 1 && (error.response?.status === 502 || error.response?.status === 504 || error.code === "ETIMEDOUT")) {
+          console.warn(`[Retry ${attempt + 1}] Updating wallet status failed, retrying in ${delay / 1000}s...`);
+          await new Promise((resolve) => setTimeout(resolve, delay));
+        } else {
+          throw new Error(`Update wallet status failed: ${error.message}`);
+        }
+      }
+    }
+  }
+
+  async claimDailyPoints(wallet, privateKey, retries = 100000, delay = 5000) {
+    for (let attempt = 0; attempt < retries; attempt++) {
+      try {
+        const walletInstance = new Wallet(privateKey);
+        const timestamp = Date.now();
+        const message = `I am claiming my daily node point for ${wallet} at ${timestamp}`;
+        const sign = await walletInstance.signMessage(message);
+
+        const response = await this.getApi().post(`/light-node/claim-node-points`, {
+          walletAddress: wallet,
+          timestamp: timestamp,
+          sign: sign,
+        });
+
+        return response.data?.message === "node points claimed successfully";
+      } catch (error) {
+        if (error.response?.status === 405) {
+          throw new Error("Points already claimed today");
+        }
+
+        if (attempt < retries - 1 && (error.response?.status === 502 || error.code === "ETIMEDOUT")) {
+          console.warn(`[Retry ${attempt + 1}] Claiming daily points failed, retrying in ${delay / 1000}s...`);
+          await new Promise((resolve) => setTimeout(resolve, delay));
+        } else {
+          throw new Error(`Claim points failed: ${error.message}`);
+        }
+      }
+    }
+  }
+
+  async signAndStart(wallet, privateKey, retries = 100000, delay = 5000) {
+    for (let attempt = 0; attempt < retries; attempt++) {
+      try {
+        const walletInstance = new Wallet(privateKey);
+        const timestamp = Date.now();
+        const message = `Node activation request for ${wallet} at ${timestamp}`;
+        const sign = await walletInstance.signMessage(message);
+
+        const response = await this.getApi().post(`/light-node/node-action/${wallet}/start`, {
+          sign: sign,
+          timestamp: timestamp,
+        });
+
+        return response.data?.message === "node action executed successfully";
+      } catch (error) {
+        if (attempt < retries - 1 && (error.response?.status === 502 || error.code === "ETIMEDOUT")) {
+          console.warn(`[Retry ${attempt + 1}] Node activation failed, retrying in ${delay / 1000}s...`);
+          await new Promise((resolve) => setTimeout(resolve, delay));
+        } else {
+          throw new Error(`Node activation failed: ${error.message}`);
+        }
+      }
+    }
+  }
+
+
+*/
+
+async checkNodeStatus(wallet, delay = 10000) {
+    while (true) {
+        try {
+            const response = await this.getApi().get(`/light-node/node-status/${wallet}`);
+            return response.data?.data?.startTimestamp !== null;
+        } catch (error) {
+            console.warn(`[${wallet}] Node status check failed: ${error.message}. Retrying in ${delay / 1000}s...`);
+            await new Promise((resolve) => setTimeout(resolve, delay));
+        }
+    }
+}
+
+async checkWalletDetails(wallet, delay = 10000) {
+    while (true) {
+        try {
+            const response = await this.getApi().get(`/referral/wallet-details/${wallet}`);
+            return response.data?.data || {};
+        } catch (error) {
+            console.warn(`[${wallet}] Fetching wallet details failed: ${error.message}. Retrying in ${delay / 1000}s...`);
+            await new Promise((resolve) => setTimeout(resolve, delay));
+        }
+    }
+}
+
+async updateWalletStatus(wallet, delay = 10000) {
+    while (true) {
+        try {
+            const isRunning = await this.checkNodeStatus(wallet);
+
+            if (!isRunning) {
+                console.warn(`[${wallet}] Node not running, retrying in ${delay / 1000}s...`);
+                await new Promise((resolve) => setTimeout(resolve, delay));
+                continue;  // Coba lagi
+            }
+
+            const walletDetails = await this.checkWalletDetails(wallet);
+            return walletDetails;
+        } catch (error) {
+            console.warn(`Error updating wallet status for ${wallet}: ${error.message}`);
+            console.warn(`Retrying in ${delay / 1000}s...`);
+            await new Promise((resolve) => setTimeout(resolve, delay));
+        }
+    }
+}
+
+async claimDailyPoints(wallet, privateKey, delay = 10000) {
+    while (true) {
+        try {
+            const walletInstance = new Wallet(privateKey);
+            const timestamp = Date.now();
+            const message = `I am claiming my daily node point for ${wallet} at ${timestamp}`;
+            const sign = await walletInstance.signMessage(message);
+
+            const response = await this.getApi().post(`/light-node/claim-node-points`, {
+                walletAddress: wallet,
+                timestamp: timestamp,
+                sign: sign,
+            });
+
+            if (response.data?.message === "node points claimed successfully") {
+                return true;
+            }
+        } catch (error) {
+            if (error.response?.status === 405) {
+                console.warn(`[${wallet}] Points already claimed today.`);
+                return false;
+            }
+
+            console.warn(`[${wallet}] Claiming daily points failed: ${error.message}. Retrying in ${delay / 1000}s...`);
+            await new Promise((resolve) => setTimeout(resolve, delay));
+        }
+    }
+}
+
+async signAndStart(wallet, privateKey, delay = 10000) {
+    while (true) {
+        try {
+            const walletInstance = new Wallet(privateKey);
+            const timestamp = Date.now();
+            const message = `Node activation request for ${wallet} at ${timestamp}`;
+            const sign = await walletInstance.signMessage(message);
+
+            const response = await this.getApi().post(`/light-node/node-action/${wallet}/start`, {
+                sign: sign,
+                timestamp: timestamp,
+            });
+
+            if (response.data?.message === "node action executed successfully") {
+                return true;
+            }
+        } catch (error) {
+            console.warn(`[${wallet}] Node activation failed: ${error.message}. Retrying in ${delay / 1000}s...`);
+            await new Promise((resolve) => setTimeout(resolve, delay));
+        }
+    }
+}
+
+  async startPing(wallet) {
+    if (this.pingIntervals.has(wallet)) {
+      return;
+    }
+
+    const stats = this.walletStats.get(wallet);
+
+    try {
+      const privateKey = this.privateKeys.get(wallet);
+
+      if (!privateKey) {
+        throw new Error("Private key not found for wallet");
+      }
+
+      stats.status = "Checking Status";
+      this.renderDashboard();
+
+      let isRunning = await this.checkNodeStatus(wallet);
+      if (!isRunning) {
+        stats.status = "Activating";
+        this.renderDashboard();
+
+        await this.signAndStart(wallet, privateKey);
+        stats.status = "Activated";
+        this.renderDashboard();
+
+        for (let attempt = 0; attempt < 10000; attempt++) {
+          await new Promise((resolve) => setTimeout(resolve, 10000)); // ⏳ Tunggu sebelum retry
+          isRunning = await this.checkNodeStatus(wallet);
+          if (isRunning) break;
+          console.warn(`[Retry ${attempt + 1}] Checking node status...`);
+        }
+
+        if (!isRunning) {
+          throw new Error("Node activation failed after multiple attempts");
+        }
+
+      }
+
+      await new Promise((resolve) => setTimeout(resolve, 10000));
+
+      let { nodePoints, dailyStreak, lastClaimed, error } = await this.updateWalletStatus(wallet);
+
+      if (error === "Node not running") {
+          console.warn(`[${wallet}] Node is not running! Restarting...`);
+          stats.status = "Restarting";
+          this.renderDashboard();
+
+          await this.signAndStart(wallet, privateKey);
+          stats.status = "Activated";
+          this.renderDashboard();
+
+          await new Promise((resolve) => setTimeout(resolve, 10000));
+
+          ({ nodePoints, dailyStreak, lastClaimed } = await this.updateWalletStatus(wallet));
+      }
+
+      const lastClaimedUTC = new Date(lastClaimed).getTime();
+      if (!lastClaimed || Date.now() - lastClaimedUTC >= 24 * 60 * 60 * 1000) {
+        try {
+          const privateKey = this.privateKeys.get(wallet);
+          const claimed = await this.claimDailyPoints(wallet, privateKey);
+          if (claimed) {
+            stats.status = "Claimed Daily Points";
+            this.renderDashboard();
+
+            const { nodePoints, dailyStreak, lastClaimed } = await this.updateWalletStatus(wallet);
+            stats.points = nodePoints;
+            stats.dailyStreak = dailyStreak;
+	    stats.lastClaimed = lastClaimed
+	      ? new Intl.DateTimeFormat("en-US", {
+	          month: "short",
+	          day: "numeric",
+	          hour: "numeric",
+	          minute: "numeric",
+	          second: "numeric",
+	          hour12: true,
+	        }).format(new Date(lastClaimed)).toLocaleString()
+	      : "Never Claimed";
+          }
+        } catch (error) {
+          console.error(`Error claiming daily points for ${wallet}:`, error.message);
+          stats.error = error.message;
+        }
+      }
+
+      stats.lastPing = new Date().toLocaleTimeString();
+      stats.points = nodePoints || stats.points;
+      stats.dailyStreak = dailyStreak;
+      stats.lastClaimed = lastClaimed
+	  ? new Intl.DateTimeFormat("en-US", {
+	      month: "short",
+	      day: "numeric",
+	      hour: "numeric",
+	      minute: "numeric",
+	      second: "numeric",
+	      hour12: true,
+	    }).format(new Date(lastClaimed)).toLocaleString()
+	  : "Never Claimed";
+      stats.status = "Active";
+      stats.error = null;
+
+    } catch (error) {
+      stats.status = "Error";
+      stats.error = error.message;
+      console.error(`Error starting node for ${wallet}:`, error.message);
+      return;
+    }
+
+    const pingInterval = setInterval(async () => {
+      try {
+
+        let { nodePoints, dailyStreak, lastClaimed, error } = await this.updateWalletStatus(wallet);
+
+        if (error === "Node not running") {
+            console.warn(`[${wallet}] Node stopped! Restarting...`);
+            stats.status = "Restarting";
+            this.renderDashboard();
+
+            await this.retry(() => this.signAndStart(wallet, privateKey), 100000, 10000);
+            stats.status = "Activated";
+            this.renderDashboard();
+
+            await new Promise((resolve) => setTimeout(resolve, 10000));
+
+            ({ nodePoints, dailyStreak, lastClaimed } = await this.retry(() => this.updateWalletStatus(wallet), 100000, 10000));
+        }
+
+        stats.lastPing = new Date().toLocaleTimeString();
+        stats.points = nodePoints || stats.points;
+        stats.dailyStreak = dailyStreak;
+	stats.lastClaimed = lastClaimed
+	  ? new Intl.DateTimeFormat("en-US", {
+	      month: "short",
+	      day: "numeric",
+	      hour: "numeric",
+	      minute: "numeric",
+	      second: "numeric",
+	      hour12: true,
+	    }).format(new Date(lastClaimed)).toLocaleString()
+	  : "Never Claimed";
+        stats.status = "Active";
+        stats.error = null;
+
+        const lastClaimedUTC = new Date(lastClaimed).getTime();
+        if (!lastClaimed || Date.now() - lastClaimedUTC >= 24 * 60 * 60 * 1000) {
+          try {
+            const privateKey = this.privateKeys.get(wallet);
+            const claimed = await this.claimDailyPoints(wallet, privateKey);
+            if (claimed) {
+              stats.status = "Claimed Daily Points";
+              this.renderDashboard();
+
+              const { nodePoints, dailyStreak, lastClaimed } = await this.updateWalletStatus(wallet);
+              stats.points = nodePoints;
+              stats.dailyStreak = dailyStreak;
+	      stats.lastClaimed = lastClaimed
+		? new Intl.DateTimeFormat("en-US", {
+		   month: "short",
+		   day: "numeric",
+		   hour: "numeric",
+		   minute: "numeric",
+		   second: "numeric",
+		   hour12: true,
+		 }).format(new Date(lastClaimed)).toLocaleString()
+		: "Never Claimed";
+            }
+          } catch (error) {
+            console.error(`Error claiming daily points for ${wallet}:`, error.message);
+            stats.error = error.message;
+          }
+        }
+      } catch (error) {
+        stats.status = "Error";
+        stats.error = error.message;
+      }
+      this.renderDashboard();
+    }, CONFIG.PING_INTERVAL_MS);
+
+    this.pingIntervals.set(wallet, pingInterval);
+    this.renderDashboard();
+  }
+
+  renderDashboard() {
+    const now = Date.now();
+    if (now - this.lastRender < this.minRenderInterval) {
+      if (this.renderTimeout) {
+        clearTimeout(this.renderTimeout);
+      }
+      this.renderTimeout = setTimeout(() => {
+        this.actualRender();
+      }, this.minRenderInterval);
+      return;
+    }
+
+    this.actualRender();
+  }
+
+  actualRender() {
+    this.lastRender = Date.now();
+    let output = [];
+
+    output.push("\x1b[2J\x1b[H");
+    output.push(getBanner());
+
+    const startIndex = this.currentPage * this.walletsPerPage;
+    const endIndex = Math.min(
+      startIndex + this.walletsPerPage,
+      this.wallets.length
+    );
+    const totalPages = Math.ceil(this.wallets.length / this.walletsPerPage);
+
+    for (let i = startIndex; i < endIndex; i++) {
+      const wallet = this.wallets[i];
+      const stats = this.walletStats.get(wallet);
+      const prefix =
+        i === this.selectedIndex ? `${colors.cyan} ${colors.reset} ` : "  ";
+      const shortWallet = `${wallet.substr(0, 6)}...${wallet.substr(-4)}`;
+
+      output.push(
+        `${prefix} Wallet: ${colors.accountName}${shortWallet}${colors.reset}`
+      );
+      output.push(
+        `   Status: ${this.getStatusColor(stats.status)}${stats.status}${
+          colors.reset
+        }`
+      );
+      output.push(`   Points: ${colors.info}${stats.points}${colors.reset}`);
+      output.push(`   Streak: ${colors.info}${stats.dailyStreak}${colors.reset}`);
+      output.push(
+        `   Last Ping: ${colors.info}${stats.lastPing}${colors.reset}`);
+      output.push(
+        `   Last Claim: ${colors.info}${stats.lastClaimed || "N/A"}${colors.reset}`
+      );
+
+      if (stats.error) {
+        output.push(`   Error: ${colors.error}${stats.error}${colors.reset}`);
+      }
+      output.push("");
+    }
+
+    process.stdout.write(output.join("\n"));
+  }
+
+  getStatusColor(status) {
+    switch (status) {
+      case "Active":
+        return colors.success;
+      case "Error":
+        return colors.error;
+      case "Activated":
+        return colors.taskComplete;
+      case "Activation Failed":
+        return colors.taskFailed;
+      case "Starting":
+        return colors.taskInProgress;
+      case "Checking Status":
+        return colors.taskInProgress;
+      case "Activating":
+        return colors.taskInProgress;
+      default:
+        return colors.reset;
+    }
+  }
+
+  handleKeyPress(str, key) {
+    const startIndex = this.currentPage * this.walletsPerPage;
+    const endIndex = Math.min(
+      startIndex + this.walletsPerPage,
+      this.wallets.length
+    );
+    const totalPages = Math.ceil(this.wallets.length / this.walletsPerPage);
+
+    if (key.name === "up" && this.selectedIndex > startIndex) {
+      this.selectedIndex--;
+      this.renderDashboard();
+    } else if (key.name === "down" && this.selectedIndex < endIndex - 1) {
+      this.selectedIndex++;
+      this.renderDashboard();
+    } else if (key.name === "left" && this.currentPage > 0) {
+      this.currentPage--;
+      this.selectedIndex = this.currentPage * this.walletsPerPage;
+      this.renderDashboard();
+    } else if (key.name === "right" && this.currentPage < totalPages - 1) {
+      this.currentPage++;
+      this.selectedIndex = this.currentPage * this.walletsPerPage;
+      this.renderDashboard();
+    }
+  }
+
+  async start() {
+    process.on("SIGINT", function () {
+      console.log(`\n${colors.info}Shutting down...${colors.reset}`);
+      process.exit();
+    });
+
+    process.on("exit", () => {
+      for (let [wallet, interval] of this.pingIntervals) {
+        clearInterval(interval);
+      }
+      process.stdin.pause();
+    });
+
+    await this.initialize();
+    this.renderDashboard();
+
+    process.stdin.on("keypress", (str, key) => {
+      if (key.ctrl && key.name === "c") {
+        process.emit("SIGINT");
+      } else {
+        this.handleKeyPress(str, key);
+      }
+    });
+  }
+}
+
+const dashboard = new WalletDashboard();
+dashboard.start().catch((error) => {
+  console.error(`${colors.error}Fatal error: ${error}${colors.reset}`);
+  process.exit(1);
+});
